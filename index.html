@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>影像拼貼與輸出 (GIF / MP4)</title>
+    <link rel="stylesheet" href="src/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Fabric.js -->
+    <script src="https://cdn.jsdelivr.net/npm/fabric@5.3.0/dist/fabric.min.js"></script>
+    <!-- gifler: animated GIF rendering to canvas -->
+    <script src="https://cdn.jsdelivr.net/npm/gifler@0.1.0/gifler.min.js"></script>
+    <!-- ffmpeg.wasm for in-browser transcoding -->
+    <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.8/dist/ffmpeg.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/util@0.12.1/dist/umd/index.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>影像拼貼與輸出</h1>
+        <div class="actions">
+            <label class="btn">
+                上傳圖片 (可多選)
+                <input id="fileInput" type="file" accept="image/*" multiple hidden>
+            </label>
+            <button id="btnDelete" class="btn" title="刪除選取">刪除選取</button>
+            <button id="btnFront" class="btn" title="置於最前">置前</button>
+            <button id="btnBack" class="btn" title="置於最後">置後</button>
+            <span class="divider"></span>
+            <label>畫布寬
+                <input id="canvasW" type="number" min="64" value="800">
+            </label>
+            <label>高
+                <input id="canvasH" type="number" min="64" value="600">
+            </label>
+            <label>背景
+                <input id="bgColor" type="color" value="#111111">
+            </label>
+            <button id="btnResize" class="btn">套用尺寸</button>
+            <span class="divider"></span>
+            <label>FPS
+                <input id="fps" type="number" min="1" max="60" value="30">
+            </label>
+            <button id="btnRec" class="btn primary">開始錄製</button>
+            <button id="btnStop" class="btn" disabled>停止</button>
+            <button id="btnSaveWebM" class="btn" disabled>下載 WebM</button>
+            <button id="btnToMP4" class="btn" disabled>轉 MP4</button>
+            <button id="btnToGIF" class="btn" disabled>轉 GIF</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="stageWrap">
+            <canvas id="stage" width="800" height="600"></canvas>
+        </div>
+        <aside id="log"></aside>
+    </main>
+
+    <footer>
+        <span>拖曳、縮放、旋轉物件；支援靜態與動態 GIF。</span>
+        <a href="https://github.com/" target="_blank" rel="noreferrer">部署到 GitHub Pages</a>
+    </footer>
+
+    <script src="src/main.js"></script>
+</body>
+<script>
+// 防止在 GitHub Pages 被視為跨來源時，文件載入資源問題的提示（無程式碼）。
+</script>
+</html>
+
+
